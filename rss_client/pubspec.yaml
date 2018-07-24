@@ -12,6 +12,9 @@ dependencies:
   sqflite: ^0.10.0
   path_provider: ^0.4.1
   rxdart: ^0.18.0
+  flutter_html_view: ^0.3.1
+  html2md: ^0.1.5
+  flutter_markdown: ^0.1.5
 
 dev_dependencies:
   flutter_test:

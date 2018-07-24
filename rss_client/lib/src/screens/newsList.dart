@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import '../blocks/stories_provider.dart';
+import '../blocs/stories_provider.dart';
+import '../widgets/news_list_tile.dart';
+import '../widgets/refresh.dart';
 
 class NewsList extends StatelessWidget {
   Widget build(context) {
     final bloc = StoriesProvider.of(context);
-    bloc.fetchTopIds();
 
     return Scaffold(
       appBar: AppBar(
@@ -24,11 +25,15 @@ class NewsList extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return ListView.builder(
-          itemBuilder: (context, int index) {
-            return Text('${snapshot.data[index]}');
-          },
-          itemCount: snapshot.data.length,
+
+        return Refresh(
+          child:  ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, int index) {
+              bloc.fetchItem(snapshot.data[index]);
+              return NewsListTile(itemId: snapshot.data[index]);
+            },
+          ),
         );
       },
 
